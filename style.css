@@ -9,6 +9,15 @@ body {
 .container {
   max-width: 400px;
   margin: 0 auto;
+  
+#clickBtn {
+  transition: transform 0.1s ease, box-shadow 0.2s ease;
+}
+
+#clickBtn.clicked {
+  transform: scale(0.9);
+  box-shadow: 0 0 10px #00ffcc;
+}
 }
 button {
   padding: 15px 30px;
