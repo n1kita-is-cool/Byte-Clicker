@@ -11,6 +11,50 @@ clickBtn.addEventListener("click", () => {
     clickBtn.classList.remove("clicked");
   }, 100); // 0.1 seconds
 });
+const particlesContainer = document.getElementById("particles");
+
+function createParticle(x, y) {
+  const particle = document.createElement("div");
+  particle.className = "particle";
+
+  // Random direction
+  const dx = (Math.random() - 0.5) * 200 + "px";
+  const dy = (Math.random() - 0.5) * 200 + "px";
+  particle.style.setProperty("--dx", dx);
+  particle.style.setProperty("--dy", dy);
+
+  particle.style.left = x + "px";
+  particle.style.top = y + "px";
+
+  particlesContainer.appendChild(particle);
+
+  // Remove particle after animation
+  setTimeout(() => {
+    particle.remove();
+  }, 800);
+}
+
+// Update click listener
+clickBtn.addEventListener("click", (e) => {
+  glitches += multiplier;
+  clickSound.currentTime = 0;
+  clickSound.play();
+  updateUI();
+  saveGame();
+
+  // Animate click
+  clickBtn.classList.add("clicked");
+  setTimeout(() => {
+    clickBtn.classList.remove("clicked");
+  }, 100);
+
+  // Create particles at mouse position
+  const rect = clickBtn.getBoundingClientRect();
+  const clickX = rect.left + rect.width / 2;
+  const clickY = rect.top + rect.height / 2;
+  createParticle(clickX, clickY);
+});
+
 
 let glitches = parseInt(localStorage.getItem("glitches")) || 0;
 let multiplier = parseInt(localStorage.getItem("multiplier")) || 1;
