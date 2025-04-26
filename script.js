@@ -1,3 +1,17 @@
+clickBtn.addEventListener("click", () => {
+  glitches += multiplier;
+  clickSound.currentTime = 0;
+  clickSound.play();
+  updateUI();
+  saveGame();
+
+  // Animate the click
+  clickBtn.classList.add("clicked");
+  setTimeout(() => {
+    clickBtn.classList.remove("clicked");
+  }, 100); // 0.1 seconds
+});
+
 let glitches = parseInt(localStorage.getItem("glitches")) || 0;
 let multiplier = parseInt(localStorage.getItem("multiplier")) || 1;
 let autoClickers = parseInt(localStorage.getItem("autoClickers")) || 0;
